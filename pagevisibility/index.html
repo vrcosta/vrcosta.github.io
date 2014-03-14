@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>RippleConf | Page Visibility</title>
+        <link href="http://fonts.googleapis.com/css?family=Orbitron|Open+Sans" rel="stylesheet" type="text/css" />
+		<link href="../css/styles.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container pagevisibility-page">
+			<h1>Page Visibility</h1>
+			<p class="request-counter">Request counter: <span id="number-of-requests">0</span></p>
+		</div>
+		<script>
+			// adding event listeners
+			document.addEventListener('visibilitychange', function(e) {
+				document.title = "RippleConf | " + document.visibilityState;
+				if (document.visibilityState === "visible") {
+					startXHR();
+				} else {
+					stopXHR();					
+				}
+			});
+
+			var xhrInterval,
+				// s
+				startXHR = function startXHR() {
+					xhrInterval = setInterval(function() {
+						var currentNumberNode = document.getElementById('number-of-requests'),
+							currentNumber = parseInt(currentNumberNode.innerHTML, 10);
+						currentNumber++;
+						currentNumberNode.innerHTML = currentNumber;
+					}, 125);
+				},
+				stopXHR = function stopXHR() {
+					clearInterval(xhrInterval);
+				};
+
+			document.title = "RippleConf | " + document.visibilityState;
+			startXHR();
+
+
+		</script>
+	</body>
+</html>

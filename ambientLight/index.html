@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>RippleConf | DeviceLightEvent</title>
+        <link href="http://fonts.googleapis.com/css?family=Orbitron|Open+Sans" rel="stylesheet" type="text/css" />
+		<link href="../css/styles.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container ambientlight-page">
+			<h1>DeviceLightEvent (firefox)</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu convallis ante. Donec pellentesque mollis elit, non fermentum orci aliquet non. Pellentesque rhoncus dignissim quam, non tincidunt nisi feugiat et. Nam sed neque sagittis, sodales ligula et, auctor neque. Donec vestibulum erat fermentum, sagittis metus at, facilisis mi. Quisque a egestas ante. Sed tincidunt, turpis hendrerit ultrices suscipit, nibh dui eleifend est, at volutpat lacus velit sit amet diam. In hac habitasse platea dictumst. In quis tincidunt velit, ac euismod nulla. Vestibulum lectus nulla, pharetra venenatis faucibus ac, venenatis ut justo.<br />
+				<br />
+				Maecenas velit massa, blandit ac tristique sed, ornare nec ante. Aenean quam lacus, commodo in magna a, sodales ultricies justo. Donec aliquam mauris sem, non dapibus augue pulvinar id. Cras euismod nisl quis consequat pulvinar. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi congue posuere augue, sed viverra metus. Donec quis vestibulum nibh. Morbi at urna vel tellus blandit accumsan ac eget nisi.<br />
+				<br />
+				Nullam ante nisi, suscipit quis sem at, adipiscing egestas massa. Nunc commodo leo eget quam varius, vel consectetur augue mollis. Donec eu lectus felis. Cras eget venenatis justo, bibendum faucibus leo. Sed vestibulum, tellus nec dignissim lobortis, magna tellus vehicula leo, vel ullamcorper urna risus vitae ligula. Proin ullamcorper nibh odio, sed luctus tellus commodo vel. In facilisis id dolor ac auctor. In tincidunt erat adipiscing urna commodo, eu vulputate nisl gravida. In at augue euismod, ornare leo ut, dictum lacus. Quisque accumsan urna at turpis mattis vulputate. Nulla egestas adipiscing lorem non auctor. Nam auctor lorem sit amet sem aliquam pharetra.<br />
+				<br />
+				Duis dignissim felis vitae massa sodales, vitae hendrerit leo lacinia. Nunc lobortis dolor a eros tempor feugiat. Nam venenatis nunc vehicula, consequat sem nec, varius dolor. Maecenas condimentum porttitor velit, eget bibendum risus congue id. Cras dictum aliquam massa et fringilla. Etiam condimentum nibh mi, in varius felis adipiscing eu. Phasellus massa dolor, rutrum iaculis interdum imperdiet, mattis eu massa. Nam vitae viverra urna.<br />
+				<br />
+				Fusce vel iaculis nunc. Mauris lacinia faucibus lacinia. Quisque ornare lectus non luctus lobortis. Morbi scelerisque sapien justo, vel convallis metus venenatis vel. Donec vitae elementum augue, sit amet viverra tellus. Curabitur facilisis semper varius. Suspendisse aliquam elementum placerat. Donec eu pharetra nunc, quis aliquet leo. Donec consequat lectus et enim cursus tempor. Proin vel erat venenatis, porta metus id, dictum arcu. Suspendisse ut nunc arcu. In hac habitasse platea dictumst. Pellentesque ullamcorper luctus enim, sed blandit purus aliquet eget.</p>
+		</div>
+		<script>
+			window.addEventListener('devicelight', function(e) {
+				var html = document.querySelector('html');
+
+				if (e.value < 2000) {
+					html.classList.remove('light');
+					html.classList.add('dark');
+				} else {
+					html.classList.remove('dark');
+					html.classList.add('light');
+				}
+			});
+
+			window.addEventListener('lightlevel', function(e) {
+				console.log(e);
+			});
+		</script>
+	</body>
+</html>

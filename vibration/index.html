@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+        <title>RippleConf | Vibration API</title>
+        <link href="http://fonts.googleapis.com/css?family=Orbitron|Open+Sans" rel="stylesheet" type="text/css" />
+		<link href="../css/styles.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container vibration-page">
+			<h1>Vibration API</h1>
+
+			<div class="buttons">
+				<button id="vibrate-once">Vibrate once</button>
+				<button id="vibrate-pattern">Vibrate pattern</button>
+				<button id="vibrate-start">Vibrate start</button>
+				<button id="vibrate-stop">Vibrate stop</button>
+			</div>
+			
+		</div>
+		<script>
+			var installVibration = function installVibration() {
+				if (!window.navigator.vibrate) {
+					var allButtons = document.querySelectorAll('button');
+					[].forEach.call(allButtons, function(node) {
+						node.setAttribute('disabled', '');
+					});
+					return;
+				}
+
+				document.getElementById('vibrate-once').addEventListener('click', function(e) {
+					window.navigator.vibrate(1000);
+				});
+
+				document.getElementById('vibrate-pattern').addEventListener('click', function(e) {
+					window.navigator.vibrate([1000, 500, 2000, 500, 3000]);
+				});
+
+				document.getElementById('vibrate-start').addEventListener('click', function(e) {
+					window.navigator.vibrate(10000);
+				});
+
+				document.getElementById('vibrate-stop').addEventListener('click', function(e) {
+					window.navigator.vibrate(0);
+				});
+			}
+
+			installVibration();
+
+		</script>
+	</body>
+</html>

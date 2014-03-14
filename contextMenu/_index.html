@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>RippleConf | ContextMenu</title>
+        <link href="http://fonts.googleapis.com/css?family=Orbitron|Open+Sans" rel="stylesheet" type="text/css" />
+		<link href="../css/styles.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container contextmenu-page">
+			<h1>ContextMenu API</h1>
+			<section contextmenu="mymenu">
+				<ul id="list">
+					<li data-url="http://download.com/such.document">Such document</li>
+					<li data-url="http://download.com/very.spreadsheet">Very spreadsheet</li>
+					<li data-url="http://download.com/much.pdf">Much PDF</li>
+				</ul>
+			</section>
+			<menu type="context" id="mymenu">
+				<menuitem label="Download" onclick="actionItem('Download');"></menuitem>
+				<menu label="More options...">
+					<menuitem label="Copy" onclick="actionItem('Copy');"></menuitem>
+					<menuitem label="Delete" onclick="actionItem('Delete');"></menuitem>
+				</menu>
+			</menu>
+			<p id="status"></p>
+		</div>
+		<script>
+			var selectedItem;
+
+			document.getElementById('mymenu').addEventListener('show', function(e) {
+				console.log("I am missing the relatedTarget attribute")
+			});
+
+			var listItems = document.querySelectorAll('#list li');
+			[].forEach.call(listItems, function(node) {
+				node.addEventListener('mouseenter', function(e) {
+					selectedItem = e.currentTarget;
+				});
+			});
+
+			var actionItem = function actionItem(action) {
+				document.getElementById('status').innerHTML = action + " " + selectedItem.getAttribute('data-url');
+			}
+
+			var openUrl = function openUrl(url) {
+				window.open(url);
+			}
+		</script>
+	</body>
+</html>

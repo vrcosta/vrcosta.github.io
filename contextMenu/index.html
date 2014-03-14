@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>RippleConf | ContextMenu</title>
+        <link href="http://fonts.googleapis.com/css?family=Orbitron|Open+Sans" rel="stylesheet" type="text/css" />
+		<link href="../css/styles.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container contextmenu-page">
+			<h1>ContextMenu API</h1>
+			<section >
+				<ul id="list">
+					<li data-url="http://download.com/such.document" contextmenu="mymenu">Such document</li>
+					<li data-url="http://download.com/very.spreadsheet" contextmenu="mymenu">Very spreadsheet</li>
+					<li data-url="http://download.com/much.pdf" contextmenu="mymenu">Much PDF</li>
+				</ul>
+			</section>
+			<menu type="context" id="mymenu">
+				<menuitem label="Download" onclick="actionItem('Download');"></menuitem>
+				<menu label="More options...">
+					<menuitem label="Copy" onclick="actionItem('Copy');"></menuitem>
+					<menuitem label="Delete" onclick="actionItem('Delete');"></menuitem>
+				</menu>
+			</menu>
+			<p id="status"></p>
+		</div>
+		<script>
+			var selectedItem;
+
+			document.getElementById('mymenu').addEventListener('show', function(e) {
+				console.log("I am missing the relatedTarget attribute");
+				var clickedItem = e.explicitOriginalTarget;
+				selectedItem = clickedItem.nodeName.toLowerCase() == 'li' ? clickedItem : clickedItem.parentNode;
+			});
+
+			var actionItem = function actionItem(action) {
+				document.getElementById('status').innerHTML = action + " " + selectedItem.getAttribute('data-url');
+			}
+		</script>
+	</body>
+</html>

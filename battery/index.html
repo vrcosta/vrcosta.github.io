@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>RippleConf | Battery API</title>
+        <link href="http://fonts.googleapis.com/css?family=Orbitron|Open+Sans" rel="stylesheet" type="text/css" />
+		<link href="../css/styles.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container battery-page">
+			<h1>Battery API</h1>
+			<p>Battery charge: <span id="battery-charge"></span></p>
+			<p>Charging: <span id="charging"></span></p>
+			<p>Time to full battery: <span id="time-to-full"></span></p>
+			<p>Time to empty battery: <span id="time-to-empty"></span></p>
+
+			<div class="outer-battery">
+				<div class="inner-battery" id="inner-battery">
+
+				</div>
+			</div>
+		</div>
+		<script>
+			var deviceBattery = navigator.battery;
+
+			var checkBatteryLevel = function checkBatteryLevel() {
+				var batteryLevel = (parseInt(deviceBattery.level * 100));
+				document.getElementById('battery-charge').innerHTML = batteryLevel + "%";	
+				document.getElementById('inner-battery').style.width = batteryLevel + "%";
+			},
+				checkBatteryCharging = function checkBatteryCharging() {
+					if (deviceBattery.charging) {
+						document.getElementById('charging').innerHTML = 'Charging';
+					} else {
+						document.getElementById('charging').innerHTML = 'NOT Charging';
+					}	
+				},
+				checkChargingTime = function checkChargingTime() {
+					var timeToFullNode = document.getElementById('time-to-full');
+					if (!isNaN(parseInt(deviceBattery.chargingTime,10))) {
+						timeToFullNode.innerHTML = parseInt(deviceBattery.chargingTime,10) / 60 + "m";
+					} else {
+						timeToFullNode.innerHTML = 'N/A';
+					}
+				},
+				checkDischargingTime = function checkDischargingTime() {
+					var timeToEmptyNode = document.getElementById('time-to-empty');
+					if (!isNaN(parseInt(deviceBattery.dischargingTime,10))) {
+						timeToEmptyNode.innerHTML = parseInt(deviceBattery.dischargingTime,10) / 60 + "m";
+					} else {
+						timeToEmptyNode.innerHTML = 'N/A';
+					}
+				}
+
+			deviceBattery.addEventListener('levelchange', function(e) {
+				checkBatteryLevel();
+			});
+
+			deviceBattery.addEventListener('chargingchange', function(e) {
+				checkBatteryCharging();
+			});
+
+			deviceBattery.addEventListener('chargingtimechange', function(e) {
+				checkChargingTime();
+			});
+
+			deviceBattery.addEventListener('dischargingtimechange', function(e) {
+				checkDischargingTime();
+			});
+
+			checkBatteryLevel();
+			checkBatteryCharging();
+			checkChargingTime();
+			checkDischargingTime();
+
+		</script>
+	</body>
+</html>
